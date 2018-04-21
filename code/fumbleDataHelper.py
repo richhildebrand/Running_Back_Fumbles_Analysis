@@ -1,24 +1,23 @@
-def getColumnValueOrZero(column, row):
-    value = row[column]
+def getValueOrZero(dictionary, key):
     try:
+        value = dictionary[key]
         return int(value)
-    except ValueError:
+    except (ValueError, KeyError):
         return 0
 
-def updatePlayerInCollection(row, collection):
-    gamesPlayed = getColumnValueOrZero('Games Played', row)
-    fumbles = getColumnValueOrZero('Fumbles', row)
+def addIntegerKeyValuePair(currentInformation, newInformation, key):
+    currentValue = getValueOrZero(currentInformation, key)
+    valueToAdd = getValueOrZero(newInformation, key)
 
-    key = row['Player Id']
-    player = collection.get(key, {})
-    if (player):
-        player['Games Played'] = player['Games Played'] + gamesPlayed
-        player['Fumbles'] = player['Fumbles'] +  fumbles
-        collection[key] = player
-        return player
+    newValue = currentValue + valueToAdd
+    currentInformation[key] = newValue
+    return
 
-    player = {}
-    player['Games Played'] = gamesPlayed
-    player['Fumbles'] = fumbles
-    collection[key] = player
-    return player
+def updatePlayerInCollection(row, allPlayers):
+    playerId = row['Player Id']
+    player = allPlayers.get(playerId, {})
+    addIntegerKeyValuePair(player, row, 'Games Played')
+    addIntegerKeyValuePair(player, row, 'Fumbles')
+
+    allPlayers[playerId] = player
+    return
