@@ -1,5 +1,13 @@
 import dictionaryHelper as dictionaryHelper
 
+def updatePlayersInCollection(collection): 
+    combinedFumbleData = {}
+    for rowNumber, rowData, in collection.items():
+        updatePlayerInCollection(rowData, combinedFumbleData)
+
+    return combinedFumbleData
+
+
 def updatePlayerInCollection(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
