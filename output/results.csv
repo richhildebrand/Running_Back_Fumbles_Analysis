@@ -1,17 +1,17 @@
-Player Id,Name,Games Played,Fumbles
-joeadams/2532782,"Adams, Joe",9,4
-clarenceverdin/2503464,"Verdin, Clarence",118,10
-t.j.carrie/2550164,"Carrie, T.J.",44,2
-jasonbaker/2504395,"Baker, Jason",167,1
-tomsavage/2543640,"Savage, Tom",5,3
-willblackmon/2495809,"Blackmon, Will",96,7
-tommymaddox/2501842,"Maddox, Tommy",92,24
-orlandothomas/2503317,"Thomas, Orlando",98,2
-titusyoung/2495253,"Young, Titus",26,1
-rayfarmer/2500590,"Farmer, Ray",32,1
-miketeeter/2503272,"Teeter, Mike",29,1
-brandontate/81306,"Tate, Brandon",113,13
-johncarlson/1966,"Carlson, John",90,1
-chrischambers/2504695,"Chambers, Chris",153,11
-leonlett/2501733,"Lett, Leon",121,1
-gregestandia/2506635,"Estandia, Greg",4,0
+Player Id,Name,Games Played,Fumbles,Fumbles Per Game
+joeadams/2532782,"Adams, Joe",9,4,2.25
+clarenceverdin/2503464,"Verdin, Clarence",118,10,11.8
+t.j.carrie/2550164,"Carrie, T.J.",44,2,22.0
+jasonbaker/2504395,"Baker, Jason",167,1,167.0
+tomsavage/2543640,"Savage, Tom",5,3,1.6666666666666667
+willblackmon/2495809,"Blackmon, Will",96,7,13.714285714285714
+tommymaddox/2501842,"Maddox, Tommy",92,24,3.8333333333333335
+orlandothomas/2503317,"Thomas, Orlando",98,2,49.0
+titusyoung/2495253,"Young, Titus",26,1,26.0
+rayfarmer/2500590,"Farmer, Ray",32,1,32.0
+miketeeter/2503272,"Teeter, Mike",29,1,29.0
+brandontate/81306,"Tate, Brandon",113,13,8.692307692307692
+johncarlson/1966,"Carlson, John",90,1,90.0
+chrischambers/2504695,"Chambers, Chris",153,11,13.909090909090908
+leonlett/2501733,"Lett, Leon",121,1,121.0
+gregestandia/2506635,"Estandia, Greg",4,0,0
