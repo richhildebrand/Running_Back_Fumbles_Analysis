@@ -29,7 +29,7 @@ def writeRowFromDictionary(dictionary, pathToFile, writer):
     return
 
 def writeRowsFromNestedDictionary(dictionary, pathToFile):
-    with open(pathToFile, 'w') as csv_file:
+    with open(pathToFile, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file)
 
         firstKey = list(dictionary.keys())[0]

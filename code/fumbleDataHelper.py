@@ -22,9 +22,9 @@ def updatePlayerInCollection(row, allPlayers):
 
 def calculateFumblesPerGame(combinedFumbleData):
     for key, playerData, in combinedFumbleData.items():
-        gamesPlayed = playerData['Games Played']
         fumbles = playerData['Fumbles']
-        fumblesPerGame = safeZeroDivision(gamesPlayed, fumbles)
+        gamesPlayed = playerData['Games Played']
+        fumblesPerGame = safeZeroDivision(fumbles, gamesPlayed)
 
         playerData['Fumbles Per Game'] = fumblesPerGame
 
