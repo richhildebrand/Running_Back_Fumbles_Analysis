@@ -13,9 +13,17 @@ def addIntegerKeyValuePair(currentInformation, newInformation, key):
     currentInformation[key] = newValue
     return
 
+def addOrReplaceStringKeyValuePair(currentInformation, newInformation, key): 
+    value = newInformation[key]
+    currentInformation[key] = value
+    return
+
 def updatePlayerInCollection(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
+
+    addOrReplaceStringKeyValuePair(player, row, 'Player Id')
+    addOrReplaceStringKeyValuePair(player, row, 'Name')
     addIntegerKeyValuePair(player, row, 'Games Played')
     addIntegerKeyValuePair(player, row, 'Fumbles')
 
