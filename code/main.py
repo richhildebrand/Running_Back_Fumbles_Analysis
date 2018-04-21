@@ -33,9 +33,8 @@ rowsInMemory = csvHelper.readRowsFrom(100, '../stats/Career_Stats_Fumbles.csv')
 combinedFumbleData = {}
 for rowNumber, rowData, in rowsInMemory.items():
     player = updatePlayerInCollection(rowData, combinedFumbleData)
-print(combinedFumbleData)
+#print(combinedFumbleData)
 
-for playerId, playerStats, in combinedFumbleData.items():
-    csvHelper.writeRowFromDictionary(playerStats, '../output/results.csv')
+csvHelper.writeRowsFromNestedDictionary(combinedFumbleData, '../output/results.csv')
 
 print ('Ending import')
