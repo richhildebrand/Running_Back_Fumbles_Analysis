@@ -1,6 +1,7 @@
-print ('Starting import')
 import csv
+import csvHelper as csvHelper
 
+print ('Starting import')
 def getColumnValueOrZero(column, row):
     value = row[column]
     try:
@@ -26,20 +27,15 @@ def updatePlayerInCollection(row, collection):
     collection[key] = player
     return player
 
-stopAtRow = 100
+
+rowsInMemory = csvHelper.readRowsFrom(100, '../stats/Career_Stats_Fumbles.csv')
+
 combinedFumbleData = {}
-with open('../stats/Career_Stats_Fumbles.csv', newline='') as csvfile:
-    reader = csv.DictReader(csvfile)
-    for rowNumber,rowData in enumerate(reader):
-        player = updatePlayerInCollection(rowData, combinedFumbleData)
-        if(rowNumber > stopAtRow):
-            break
+for rowNumber, rowData, in rowsInMemory.items():
+    player = updatePlayerInCollection(rowData, combinedFumbleData)
+print(combinedFumbleData)
 
-print (combinedFumbleData)
-with open('../output/results.csv', 'w') as csv_file:
-    writer = csv.writer(csv_file)
-    for playerId, playerStats in combinedFumbleData.items():
-            writer.writerow([playerId])
-
+for playerId, playerStats, in combinedFumbleData.items():
+    csvHelper.writeRowFromDictionary(playerStats, '../output/results.csv')
 
 print ('Ending import')
