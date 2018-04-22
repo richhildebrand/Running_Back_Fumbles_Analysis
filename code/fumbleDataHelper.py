@@ -8,7 +8,7 @@ def getOutputFormat():
     columnHeaders['Fumbles'] = { 'defaultValue': 'no value given'}
     columnHeaders['Rushing Attempts'] = { 'defaultValue': 'no value given'}
     columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given'}
-    
+
     return columnHeaders
 
 def combineAllRushingData(collection, combinedData): 
@@ -41,6 +41,8 @@ def combinePlayerRushingData(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
+    addOrReplaceStringKeyValuePair(player, row, 'Player Id')
+    addOrReplaceStringKeyValuePair(player, row, 'Name')
     addIntegerKeyValuePair(player, row, 'Rushing Attempts')
     addIntegerKeyValuePair(player, row, 'Rushing Yards')
 
