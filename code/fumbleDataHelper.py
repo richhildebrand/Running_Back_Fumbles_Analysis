@@ -2,49 +2,35 @@ from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValue
 
 def getOutputFormat():
     columnHeaders = { }
-    columnHeaders['Player Id'] = { 'defaultValue': 'no value given'}
-    columnHeaders['Name'] = { 'defaultValue': 'no value given'}
-    columnHeaders['Games Played'] = { 'defaultValue': 'no value given'}
-    columnHeaders['Fumbles'] = { 'defaultValue': 'no value given'}
-    columnHeaders['Rushing Attempts'] = { 'defaultValue': 'no value given'}
-    columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given'}
+    columnHeaders['Player Id'] = { 'defaultValue': 'no value given', 'type': 'string'}
+    columnHeaders['Name'] = { 'defaultValue': 'no value given', 'type': 'string'}
+    columnHeaders['Games Played Fumbles'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Games Played Rushing'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Fumbles'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Rushing Attempts'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given', 'type': 'int'}
 
     return columnHeaders
 
-def combineAllRushingData(collection, combinedData): 
+def combineAllPlayerData(collection, combinedData): 
     for rowNumber, rowData, in collection.items():
-        combinePlayerRushingData(rowData, combinedData)
+        combinePlayerData(rowData, combinedData)
 
     #calculateFumblesPerGame(combinedData)
     return combinedData
 
-def combineAllFumbleData(collection, combindedData): 
-    for rowNumber, rowData, in collection.items():
-        combinePlayerFumbleData(rowData, combindedData)
-
-    #calculateFumblesPerGame(combindedData)
-    return combindedData
-
-def combinePlayerFumbleData(row, allPlayers):
+def combinePlayerData(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
     addOrReplaceStringKeyValuePair(player, row, 'Player Id')
     addOrReplaceStringKeyValuePair(player, row, 'Name')
-    addIntegerKeyValuePair(player, row, 'Games Played')
+    addIntegerKeyValuePair(player, row, 'Games Played Fumbles')
+    addIntegerKeyValuePair(player, row, 'Games Played Rushing')
     addIntegerKeyValuePair(player, row, 'Fumbles')
-
-    allPlayers[playerId] = player
-    return
-
-def combinePlayerRushingData(row, allPlayers):
-    playerId = row['Player Id']
-    player = allPlayers.get(playerId, {})
-
-    addOrReplaceStringKeyValuePair(player, row, 'Player Id')
-    addOrReplaceStringKeyValuePair(player, row, 'Name')
     addIntegerKeyValuePair(player, row, 'Rushing Attempts')
     addIntegerKeyValuePair(player, row, 'Rushing Yards')
+
 
     allPlayers[playerId] = player
     return

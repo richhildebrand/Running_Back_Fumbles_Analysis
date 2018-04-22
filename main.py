@@ -9,8 +9,8 @@ fumbleData = csvHelper.readRowsFrom(numberOfRowsToRead, './stats/Career_Stats_Fu
 rushingData = csvHelper.readRowsFrom(numberOfRowsToRead, './stats/Career_Stats_Rushing.csv')
 
 columnDefinitions = fumbleDataHelper.getOutputFormat()
-combinedData = fumbleDataHelper.combineAllRushingData(rushingData, {})
-combinedData = fumbleDataHelper.combineAllFumbleData(fumbleData, combinedData)
+combinedData = fumbleDataHelper.combineAllPlayerData(fumbleData, {})
+combinedData = fumbleDataHelper.combineAllPlayerData(rushingData, combinedData)
 
 csvHelper.writeRows(combinedData, columnDefinitions, './output/results.csv')
 print ('Ending import')
