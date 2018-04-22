@@ -1,3 +1,12 @@
+from collections import defaultdict
+
+def getByType(currentInformation, newInformation, key, dataType):
+    if (dataType == 'int'):
+        addIntegerKeyValuePair(currentInformation, newInformation, key)
+        return
+
+    return addOrReplaceStringKeyValuePair(currentInformation, newInformation, key)
+
 def getValueOrZero(dictionary, key):
     try:
         value = dictionary[key]
@@ -14,6 +23,9 @@ def addIntegerKeyValuePair(currentInformation, newInformation, key):
     return
 
 def addOrReplaceStringKeyValuePair(currentInformation, newInformation, key): 
-    value = newInformation[key]
-    currentInformation[key] = value
+    value = newInformation.get(key, False)
+    currentInformation[key] = value or currentInformation.get(key)
     return
+
+def combine(d1, d2):
+    return { **d1, **d2 }

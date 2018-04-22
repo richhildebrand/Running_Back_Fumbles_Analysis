@@ -1,24 +1,57 @@
-import dictionaryHelper as dictionaryHelper
+from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValuePair, getByType, getValueOrZero
 
-def updatePlayersInCollection(collection): 
-    combinedFumbleData = {}
+def getOutputFormat():
+    columnHeaders = { }
+    columnHeaders['Player Id'] = { 'defaultValue': 'no value given', 'type': 'string'}
+    columnHeaders['Name'] = { 'defaultValue': 'no value given', 'type': 'string'}
+    columnHeaders['Games Played Fumbles'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Games Played Rushing'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Fumbles'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Rushing Attempts'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given', 'type': 'int'}
+
+    columnHeaders['Fumbles Per Game'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Fumbles Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Fumbles Per Yard'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Yards Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+
+    return columnHeaders
+
+def combineAllPlayerData(collection, combinedData): 
     for rowNumber, rowData, in collection.items():
-        updatePlayerInCollection(rowData, combinedFumbleData)
+        combinePlayerData(rowData, combinedData)
 
-    calculateFumblesPerGame(combinedFumbleData)
-    return combinedFumbleData
+    return combinedData
 
-def updatePlayerInCollection(row, allPlayers):
+def combinePlayerData(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
-    dictionaryHelper.addOrReplaceStringKeyValuePair(player, row, 'Player Id')
-    dictionaryHelper.addOrReplaceStringKeyValuePair(player, row, 'Name')
-    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Games Played')
-    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Fumbles')
+    headers = getOutputFormat()
+    for key, header, in headers.items():
+        getByType(player, row, key, header['type'])
 
     allPlayers[playerId] = player
     return
+
+def filterAtLeast(dataCollection, key, minValue):
+    filteredData = {}
+    for id, dataPoint, in dataCollection.items():
+        value = getValueOrZero(dataPoint, key)
+        if (value >= minValue):
+            filteredData[id] = dataPoint
+
+    return filteredData
+
+def calculateXperY(combinedFumbleData, newKey, x, y):
+    for key, playerData, in combinedFumbleData.items():
+        xValue = playerData.get(x)
+        yValue = playerData.get(y)
+        xPerY = safeZeroDivision(xValue, yValue)
+
+        playerData[newKey] = xPerY
+
+    return combinedFumbleData
 
 def calculateFumblesPerGame(combinedFumbleData):
     for key, playerData, in combinedFumbleData.items():
@@ -32,6 +65,6 @@ def calculateFumblesPerGame(combinedFumbleData):
 
 def safeZeroDivision(numerator, denominator):
     try:
-        return numerator / denominator
+        return "%.4f" % (numerator/denominator)
     except ZeroDivisionError:
         return 0

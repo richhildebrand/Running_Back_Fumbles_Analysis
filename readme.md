@@ -14,6 +14,9 @@ Finally, we will add in receiving statistics to allow for a more complete analys
 
 stats source: https://www.kaggle.com/blueblowfish/nfl-data-analysis/data
 
+To run test:
+python -m unittest discover tests
+
 
 
 
