@@ -11,8 +11,8 @@ def getOutputFormat():
     columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given', 'type': 'int'}
 
     columnHeaders['Fumbles Per Game'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
-    columnHeaders['Fumbles Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
-    columnHeaders['Fumbles Per Yard'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Carries Per Fumble'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Yards Per Fumble'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
     columnHeaders['Yards Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
 
     return columnHeaders

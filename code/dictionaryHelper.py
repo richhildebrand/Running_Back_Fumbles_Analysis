@@ -9,7 +9,8 @@ def getByType(currentInformation, newInformation, key, dataType):
 
 def getValueOrZero(dictionary, key):
     try:
-        value = str(dictionary[key]).strip()
+        valueAsString = str(dictionary[key])
+        value = valueAsString.replace(',', '').strip()
         return int(value)
     except (ValueError, KeyError):
         return 0
