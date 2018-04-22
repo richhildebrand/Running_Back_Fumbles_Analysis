@@ -1,14 +1,15 @@
 from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValuePair
 
 def getOutputFormat():
-    return {
-        {'Player Id': { 'defaultValue': 'no value given'}},
-        {'Name': { 'defaultValue': 'no value given'}},
-        {'Games Played': { 'defaultValue': 'no value given'}},
-        {'Fumbles': { 'defaultValue': 'no value given'}},
-        {'Rushing Attempts': { 'defaultValue': 'no value given'}},
-        {'Rushing Yards': { 'defaultValue': 'no value given'}}
-    }
+    columnHeaders = { }
+    columnHeaders['Player Id'] = { 'defaultValue': 'no value given'}
+    columnHeaders['Name'] = { 'defaultValue': 'no value given'}
+    columnHeaders['Games Played'] = { 'defaultValue': 'no value given'}
+    columnHeaders['Fumbles'] = { 'defaultValue': 'no value given'}
+    columnHeaders['Rushing Attempts'] = { 'defaultValue': 'no value given'}
+    columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given'}
+    
+    return columnHeaders
 
 def combineAllRushingData(collection, combinedData): 
     for rowNumber, rowData, in collection.items():
