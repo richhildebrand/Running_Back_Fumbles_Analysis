@@ -1,14 +1,31 @@
 import dictionaryHelper as dictionaryHelper
 
-def updatePlayersInCollection(collection): 
-    combinedFumbleData = {}
+def getOutputFormat():
+    headers = []
+    headers[0] = 'Player Id'
+    headers[1] = 'Name'
+    headers[2] = 'Games Played'
+    headers[3] = 'Fumbles'
+    headers[4] = 'Rushing Attempts'
+    headers[5] = 'Rushing Yards'
+
+    return headers
+
+def combineAllRushingData(collection, combinedData): 
     for rowNumber, rowData, in collection.items():
-        updatePlayerInCollection(rowData, combinedFumbleData)
+        combinePlayerRushingData(rowData, combinedData)
 
-    calculateFumblesPerGame(combinedFumbleData)
-    return combinedFumbleData
+    #calculateFumblesPerGame(combinedData)
+    return combinedData
 
-def updatePlayerInCollection(row, allPlayers):
+def combineAllFumbleData(collection, combindedData): 
+    for rowNumber, rowData, in collection.items():
+        combinePlayerFumbleData(rowData, combindedData)
+
+    #calculateFumblesPerGame(combindedData)
+    return combindedData
+
+def combinePlayerFumbleData(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
@@ -16,6 +33,16 @@ def updatePlayerInCollection(row, allPlayers):
     dictionaryHelper.addOrReplaceStringKeyValuePair(player, row, 'Name')
     dictionaryHelper.addIntegerKeyValuePair(player, row, 'Games Played')
     dictionaryHelper.addIntegerKeyValuePair(player, row, 'Fumbles')
+
+    allPlayers[playerId] = player
+    return
+
+def combinePlayerRushingData(row, allPlayers):
+    playerId = row['Player Id']
+    player = allPlayers.get(playerId, {})
+
+    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Rushing Attempts')
+    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Rushing Yards')
 
     allPlayers[playerId] = player
     return

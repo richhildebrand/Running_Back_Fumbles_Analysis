@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 def getValueOrZero(dictionary, key):
     try:
         value = dictionary[key]
@@ -17,3 +19,6 @@ def addOrReplaceStringKeyValuePair(currentInformation, newInformation, key):
     value = newInformation[key]
     currentInformation[key] = value
     return
+
+def combine(d1, d2):
+    return { **d1, **d2 }
