@@ -11,16 +11,17 @@ def readRowsFrom(numberOfRowsToRead, pathToFile):
 
     return rows
 
-def writeHeadersFromDictionary(dictionary, pathToFile, writer):
-    keys = []
-    for key, value in dictionary.items():
-        keyAsString = str(key)
-        keys.append(keyAsString)
-    writer.writerow(keys)
-
+def writeHeadersFromDefinitions(definitions, writer):
+    headers = []
+    for definition in definitions:
+        headerValue = definition['key']
+        headers.append(headerValue)
+    writer.writerow(headers)
+    print('$$$$$')
+    print(headers)
     return
 
-def writeRowFromDictionary(dictionary, pathToFile, writer):
+def writeRowFromDictionary(definitions, dictionary, writer):
     values = []
     for key, value in dictionary.items():
         valueAsString = str(value)
