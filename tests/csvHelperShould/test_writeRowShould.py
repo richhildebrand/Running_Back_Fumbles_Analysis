@@ -6,33 +6,31 @@ import unittest
 import csv
 
 class WriteRowShould(unittest.TestCase):
+    filePath = 'tests/testHelpers/testData/SampleOutput.csv'
+
+    def writeRow(self, row, definitions):
+        keysToPrint = list(definitions.keys())
+        with open(self.filePath, 'w', newline='') as csvFile:
+            writer = csv.DictWriter(csvFile, fieldnames=keysToPrint)
+            writer.writeheader()
+            csvHelper.writeRow(row, definitions, writer)
 
     def test_WriteOneRow_WithOneValue(self):
-        filePath = 'tests/testHelpers/testData/SampleOutput.csv'
         definitions = {'Header One': { 'defaultValue': 'No Value Given'}}
         row = { 'Header One': 'Header One Value' }
 
-        keysToPrint = list(definitions.keys())
-        with open(filePath, 'w', newline='') as csvFile:
-            writer = csv.DictWriter(csvFile, fieldnames=keysToPrint)
-            writer.writeheader()
-            csvHelper.writeRow(row, definitions, writer)
+        self.writeRow(row, definitions)
 
-        result = csvHelper.readRowsFrom(1, filePath)
-        assert result[0]['Header One'] == 'Header One Value'
+        result = csvHelper.readRowsFrom(1, self.filePath)[0]
+        assert result['Header One'] == 'Header One Value'
 
     def test_WriteOneRow_WithTwoValues(self):
-        filePath = 'tests/testHelpers/testData/SampleOutput.csv'
         definitions = { 'Header One': {}, 'Header Two': {} }
         row = { 'Header One': 'Value One', 'Header Two': 'Value Two' }
 
-        keysToPrint = list(definitions.keys())
-        with open(filePath, 'w', newline='') as csvFile:
-            writer = csv.DictWriter(csvFile, fieldnames=keysToPrint)
-            writer.writeheader()
-            csvHelper.writeRow(row, definitions, writer)
+        self.writeRow(row, definitions)
 
-        result = csvHelper.readRowsFrom(1, filePath)[0]
+        result = csvHelper.readRowsFrom(1, self.filePath)[0]
         assert result['Header One'] == 'Value One'
         assert result['Header Two'] == 'Value Two'
 
