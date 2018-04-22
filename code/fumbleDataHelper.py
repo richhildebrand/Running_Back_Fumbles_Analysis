@@ -10,6 +10,11 @@ def getOutputFormat():
     columnHeaders['Rushing Attempts'] = { 'defaultValue': 'no value given', 'type': 'int'}
     columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given', 'type': 'int'}
 
+    columnHeaders['Fumbles Per Game'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Fumbles Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Fumbles Per Yard'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Yards Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+
     return columnHeaders
 
 def combineAllPlayerData(collection, combinedData): 
@@ -38,6 +43,15 @@ def filterAtLeast(dataCollection, key, minValue):
 
     return filteredData
 
+def calculateXperY(combinedFumbleData, newKey, x, y):
+    for key, playerData, in combinedFumbleData.items():
+        xValue = playerData.get(x)
+        yValue = playerData.get(y)
+        xPerY = safeZeroDivision(xValue, yValue)
+
+        playerData[newKey] = xPerY
+
+    return combinedFumbleData
 
 def calculateFumblesPerGame(combinedFumbleData):
     for key, playerData, in combinedFumbleData.items():
@@ -51,6 +65,6 @@ def calculateFumblesPerGame(combinedFumbleData):
 
 def safeZeroDivision(numerator, denominator):
     try:
-        return numerator / denominator
+        return "%.4f" % (numerator/denominator)
     except ZeroDivisionError:
         return 0
