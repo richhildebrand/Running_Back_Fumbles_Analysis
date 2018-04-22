@@ -12,16 +12,13 @@ def getOutputFormat():
 
     return columnHeaders
 
-def combineAllPlayerData(collection, combinedData, collectDataAfter): 
+def combineAllPlayerData(collection, combinedData): 
     for rowNumber, rowData, in collection.items():
-        combinePlayerData(rowData, combinedData, collectDataAfter)
+        combinePlayerData(rowData, combinedData)
 
     return combinedData
 
-def combinePlayerData(row, allPlayers, collectDataAfter):
-    yearOfData = int(row['Year'])
-    if (yearOfData < collectDataAfter): return
-
+def combinePlayerData(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
@@ -31,6 +28,16 @@ def combinePlayerData(row, allPlayers, collectDataAfter):
 
     allPlayers[playerId] = player
     return
+
+def filterAtLeast(dataCollection, key, minValue):
+    filteredData = {}
+    for id, dataPoint, in dataCollection.items():
+        value = dataPoint.get(key, 0)
+        if (value >= minValue):
+            filteredData[id] = dataPoint
+
+    return filteredData
+
 
 def calculateFumblesPerGame(combinedFumbleData):
     for key, playerData, in combinedFumbleData.items():
