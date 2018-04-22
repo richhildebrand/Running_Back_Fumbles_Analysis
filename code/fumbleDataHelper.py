@@ -1,4 +1,4 @@
-from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValuePair
+from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValuePair, getByType
 
 def getOutputFormat():
     columnHeaders = { }
@@ -12,25 +12,22 @@ def getOutputFormat():
 
     return columnHeaders
 
-def combineAllPlayerData(collection, combinedData): 
+def combineAllPlayerData(collection, combinedData, collectDataAfter): 
     for rowNumber, rowData, in collection.items():
-        combinePlayerData(rowData, combinedData)
+        combinePlayerData(rowData, combinedData, collectDataAfter)
 
-    #calculateFumblesPerGame(combinedData)
     return combinedData
 
-def combinePlayerData(row, allPlayers):
+def combinePlayerData(row, allPlayers, collectDataAfter):
+    yearOfData = int(row['Year'])
+    if (yearOfData < collectDataAfter): return
+
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
-    addOrReplaceStringKeyValuePair(player, row, 'Player Id')
-    addOrReplaceStringKeyValuePair(player, row, 'Name')
-    addIntegerKeyValuePair(player, row, 'Games Played Fumbles')
-    addIntegerKeyValuePair(player, row, 'Games Played Rushing')
-    addIntegerKeyValuePair(player, row, 'Fumbles')
-    addIntegerKeyValuePair(player, row, 'Rushing Attempts')
-    addIntegerKeyValuePair(player, row, 'Rushing Yards')
-
+    headers = getOutputFormat()
+    for key, header, in headers.items():
+        getByType(player, row, key, header['type'])
 
     allPlayers[playerId] = player
     return
