@@ -26,8 +26,7 @@ def writeRow(dictionary, definitions, writer):
     writer.writerow(dictionary)
 
 def ensureKeys(dictionary, definitions): 
-    for key, value in definitions.items():
-        definition = definitions[key]
+    for key, definition in definitions.items():
         defaultValue = definition.get('defaultValue', 'no default value set')
         dictionary[key] = dictionary.get(key, defaultValue)
 
