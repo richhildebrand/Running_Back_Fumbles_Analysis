@@ -3,6 +3,7 @@ from collections import defaultdict
 def getByType(currentInformation, newInformation, key, dataType):
     if (dataType == 'int'):
         addIntegerKeyValuePair(currentInformation, newInformation, key)
+        return
 
     return addOrReplaceStringKeyValuePair(currentInformation, newInformation, key)
 
