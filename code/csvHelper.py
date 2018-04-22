@@ -1,16 +1,14 @@
 import csv
 
-def getValueOrDefault(key, dictionary):
-
-
 def readRowsFrom(numberOfRowsToRead, pathToFile): 
     rows = {}
     with open(pathToFile, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for rowNumber, rowData in enumerate(reader):
-            rows[rowNumber] = rowData
-            if(rowNumber > numberOfRowsToRead):
+            if(rowNumber >= numberOfRowsToRead):
                 break
+            rows[rowNumber] = rowData
+
     return rows
 
 def writeHeadersFromDictionary(dictionary, pathToFile, writer):
