@@ -12,6 +12,8 @@ Then, for a more advanced metric that will add the weight of both yards per carr
 
 Finally, we will add in receiving statistics to allow for a more complete analysis.
 
+After we have gather our data, we will graph the results showing players by standard deviations.
+
 stats source: https://www.kaggle.com/blueblowfish/nfl-data-analysis/data
 
 To run test:
