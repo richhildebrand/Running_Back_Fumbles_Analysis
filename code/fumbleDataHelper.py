@@ -1,15 +1,14 @@
-import dictionaryHelper as dictionaryHelper
+from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValuePair
 
 def getOutputFormat():
-    headers = []
-    headers[0] = 'Player Id'
-    headers[1] = 'Name'
-    headers[2] = 'Games Played'
-    headers[3] = 'Fumbles'
-    headers[4] = 'Rushing Attempts'
-    headers[5] = 'Rushing Yards'
-
-    return headers
+    return {
+        {'Player Id': { 'defaultValue': 'no value given'}},
+        {'Name': { 'defaultValue': 'no value given'}},
+        {'Games Played': { 'defaultValue': 'no value given'}},
+        {'Fumbles': { 'defaultValue': 'no value given'}},
+        {'Rushing Attempts': { 'defaultValue': 'no value given'}},
+        {'Rushing Yards': { 'defaultValue': 'no value given'}}
+    }
 
 def combineAllRushingData(collection, combinedData): 
     for rowNumber, rowData, in collection.items():
@@ -29,10 +28,10 @@ def combinePlayerFumbleData(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
-    dictionaryHelper.addOrReplaceStringKeyValuePair(player, row, 'Player Id')
-    dictionaryHelper.addOrReplaceStringKeyValuePair(player, row, 'Name')
-    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Games Played')
-    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Fumbles')
+    addOrReplaceStringKeyValuePair(player, row, 'Player Id')
+    addOrReplaceStringKeyValuePair(player, row, 'Name')
+    addIntegerKeyValuePair(player, row, 'Games Played')
+    addIntegerKeyValuePair(player, row, 'Fumbles')
 
     allPlayers[playerId] = player
     return
@@ -41,8 +40,8 @@ def combinePlayerRushingData(row, allPlayers):
     playerId = row['Player Id']
     player = allPlayers.get(playerId, {})
 
-    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Rushing Attempts')
-    dictionaryHelper.addIntegerKeyValuePair(player, row, 'Rushing Yards')
+    addIntegerKeyValuePair(player, row, 'Rushing Attempts')
+    addIntegerKeyValuePair(player, row, 'Rushing Yards')
 
     allPlayers[playerId] = player
     return
