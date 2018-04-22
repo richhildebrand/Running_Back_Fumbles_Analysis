@@ -11,6 +11,20 @@ def readRowsFrom(numberOfRowsToRead, pathToFile):
 
     return rows
 
+def writeRows(dictionary, definitions, filePath):
+    keysToPrint = list(definitions.keys())
+    
+    with open(filePath, 'w', newline='') as csvFile:
+        writer = csv.DictWriter(csvFile, fieldnames=keysToPrint)
+        writer.writeheader()
+
+        for key, row, in dictionary.items():
+            writeRow(row, definitions, writer)
+
+def writeRow(dictionary, definitions, writer): 
+    #ensureKeys?
+    writer.writerow(dictionary)
+
 def writeHeadersFromDefinitions(definitions, writer):
     headers = []
     for definition in definitions:
