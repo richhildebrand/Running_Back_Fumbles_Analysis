@@ -16,7 +16,7 @@ class WriteRowShould(unittest.TestCase):
             csvHelper.writeRow(row, definitions, writer)
 
     def test_WriteOneRow_WithOneValue(self):
-        definitions = {'Header One': { 'defaultValue': 'No Value Given'}}
+        definitions = {'Header One': {}}
         row = { 'Header One': 'Header One Value' }
 
         self.writeRow(row, definitions)
@@ -34,14 +34,14 @@ class WriteRowShould(unittest.TestCase):
         assert result['Header One'] == 'Value One'
         assert result['Header Two'] == 'Value Two'
 
+    def test_WriteOneRow_WithMissingValue(self):
+        definitions = {'Header One': { 'defaultValue': 'No Value Given'}}
+        row = {}
 
-    # def test_ReadFiveRows(self):
-    #     rows = csvHelper.readRowsFrom(5, 'tests/testHelpers/testData/SampleData.csv')
-    #     assert len(rows) is 5
+        self.writeRow(row, definitions)
 
-    # def test_ReadAllRows(self):
-    #     rows = csvHelper.readRowsFrom(1000, 'tests/testHelpers/testData/SampleData.csv')
-    #     assert len(rows) is 6
+        result = csvHelper.readRowsFrom(1, self.filePath)[0]
+        assert result['Header One'] == 'No Value Given'
 
 if __name__ == '__main__':
     unittest.main()

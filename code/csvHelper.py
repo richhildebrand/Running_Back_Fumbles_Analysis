@@ -21,9 +21,17 @@ def writeRows(dictionary, definitions, filePath):
         for key, row, in dictionary.items():
             writeRow(row, definitions, writer)
 
-def writeRow(dictionary, definitions, writer): 
-    #ensureKeys?
+def writeRow(dictionary, definitions, writer):
+    ensureKeys(dictionary, definitions)
     writer.writerow(dictionary)
+
+def ensureKeys(dictionary, definitions): 
+    for key, value in definitions.items():
+        definition = definitions[key]
+        defaultValue = definition.get('defaultValue', 'no default value set')
+        dictionary[key] = dictionary.get(key, defaultValue)
+
+    return dictionary
 
 def writeHeadersFromDefinitions(definitions, writer):
     headers = []
@@ -31,8 +39,6 @@ def writeHeadersFromDefinitions(definitions, writer):
         headerValue = definition['key']
         headers.append(headerValue)
     writer.writerow(headers)
-    print('$$$$$')
-    print(headers)
     return
 
 def writeRowFromDictionary(definitions, dictionary, writer):
