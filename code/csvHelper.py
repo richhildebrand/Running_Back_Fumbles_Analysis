@@ -32,32 +32,3 @@ def ensureKeys(dictionary, definitions):
         dictionary[key] = dictionary.get(key, defaultValue)
 
     return dictionary
-
-def writeHeadersFromDefinitions(definitions, writer):
-    headers = []
-    for definition in definitions:
-        headerValue = definition['key']
-        headers.append(headerValue)
-    writer.writerow(headers)
-    return
-
-def writeRowFromDictionary(definitions, dictionary, writer):
-    values = []
-    for key, value in dictionary.items():
-        valueAsString = str(value)
-        values.append(valueAsString)
-    writer.writerow(values)
-
-    return
-
-def writeRowsFromNestedDictionary(dictionary, pathToFile):
-    with open(pathToFile, 'w', newline='') as csv_file:
-        writer = csv.writer(csv_file)
-
-        firstKey = list(dictionary.keys())[0]
-        firstItem = dictionary[firstKey]
-        writeHeadersFromDictionary(firstItem, pathToFile, writer)
-
-        for key, nestedDictionary, in dictionary.items():
-            writeRowFromDictionary(nestedDictionary, pathToFile, writer)
-    return
