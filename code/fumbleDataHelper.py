@@ -1,4 +1,4 @@
-from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValuePair, getByType
+from .dictionaryHelper import addOrReplaceStringKeyValuePair, addIntegerKeyValuePair, getByType, getValueOrZero
 
 def getOutputFormat():
     columnHeaders = { }
@@ -32,7 +32,7 @@ def combinePlayerData(row, allPlayers):
 def filterAtLeast(dataCollection, key, minValue):
     filteredData = {}
     for id, dataPoint, in dataCollection.items():
-        value = dataPoint.get(key, 0)
+        value = getValueOrZero(dataPoint, key)
         if (value >= minValue):
             filteredData[id] = dataPoint
 

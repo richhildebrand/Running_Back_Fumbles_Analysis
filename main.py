@@ -4,11 +4,14 @@ import code.csvHelper as csvHelper
 import code.fumbleDataHelper as fumbleDataHelper
 
 print ('Starting import')
+dataAfter = 2010
 numberOfRowsToRead = sys.maxsize
 fumbleData = csvHelper.readRowsFrom(numberOfRowsToRead, './stats/Career_Stats_Fumbles.csv')
-rushingData = csvHelper.readRowsFrom(numberOfRowsToRead, './stats/Career_Stats_Rushing.csv')
+fumbleData = fumbleDataHelper.filterAtLeast(fumbleData, 'Year', dataAfter)
 
-#combinedData = fumbleData.filterAtLeast(combinedData, 'Rushing Attempts', 50)
+rushingData = csvHelper.readRowsFrom(numberOfRowsToRead, './stats/Career_Stats_Rushing.csv')
+rushingData = fumbleDataHelper.filterAtLeast(rushingData, 'Year', dataAfter)
+
 
 
 collectAfterYear = 2010
