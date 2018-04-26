@@ -2,6 +2,7 @@ import sys
 sys.path.append('./code')
 import code.csvHelper as csvHelper
 import code.fumbleDataHelper as fumbleDataHelper
+import code.dictionaryHelper as dictionaryHelper
 
 print ('Starting import')
 collectAfterYear = 2010
@@ -21,5 +22,8 @@ combinedData = fumbleDataHelper.calculateXperY(combinedData, 'Fumbles Per Game',
 combinedData = fumbleDataHelper.calculateXperY(combinedData, 'Carries Per Fumble', 'Rushing Attempts', 'Rushing Fumbles')
 combinedData = fumbleDataHelper.calculateXperY(combinedData, 'Yards Per Fumble', 'Rushing Yards', 'Rushing Fumbles')
 combinedData = fumbleDataHelper.calculateXperY(combinedData, 'Yards Per Carry', 'Rushing Yards', 'Rushing Attempts')
+
+combinedData = dictionaryHelper.addStandardDeviation(combinedData, 'Yards Per Fumble')
+
 csvHelper.writeRows(combinedData, columnDefinitions, './output/results.csv')
 print ('Ending import')

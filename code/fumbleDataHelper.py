@@ -14,6 +14,7 @@ def getOutputFormat():
     columnHeaders['Carries Per Fumble'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
     columnHeaders['Yards Per Fumble'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
     columnHeaders['Yards Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Yards Per Fumble_std'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
 
     return columnHeaders
 
@@ -52,16 +53,6 @@ def calculateXperY(combinedFumbleData, newKey, x, y):
         playerData[newKey] = xPerY
 
     return combinedFumbleData
-
-def calculateFumblesPerGame(combinedFumbleData):
-    for key, playerData, in combinedFumbleData.items():
-        fumbles = playerData['Fumbles']
-        gamesPlayed = playerData['Games Played']
-        fumblesPerGame = safeZeroDivision(fumbles, gamesPlayed)
-
-        playerData['Fumbles Per Game'] = fumblesPerGame
-
-    return
 
 def safeZeroDivision(numerator, denominator):
     try:
