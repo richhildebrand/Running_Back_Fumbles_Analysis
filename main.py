@@ -24,6 +24,7 @@ combinedData = fumbleDataHelper.calculateXperY(combinedData, 'Yards Per Fumble',
 combinedData = fumbleDataHelper.calculateXperY(combinedData, 'Yards Per Carry', 'Rushing Yards', 'Rushing Attempts')
 
 combinedData = dictionaryHelper.addStandardDeviation(combinedData, 'Yards Per Fumble')
+combinedData = dictionaryHelper.addStandardDeviation(combinedData, 'Yards Per Carry')
 
 csvHelper.writeRows(combinedData, columnDefinitions, './output/results.csv')
 print ('Ending import')

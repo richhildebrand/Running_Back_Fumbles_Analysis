@@ -15,6 +15,7 @@ def getOutputFormat():
     columnHeaders['Yards Per Fumble'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
     columnHeaders['Yards Per Carry'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
     columnHeaders['Yards Per Fumble_std'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
+    columnHeaders['Yards Per Carry_std'] = { 'defaultValue': 'no value given', 'type': 'calculated'}
 
     return columnHeaders
 
