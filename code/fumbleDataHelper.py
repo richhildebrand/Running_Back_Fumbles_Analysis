@@ -6,7 +6,7 @@ def getOutputFormat():
     columnHeaders['Name'] = { 'defaultValue': 'no value given', 'type': 'string'}
     columnHeaders['Games Played Fumbles'] = { 'defaultValue': 'no value given', 'type': 'int'}
     columnHeaders['Games Played Rushing'] = { 'defaultValue': 'no value given', 'type': 'int'}
-    columnHeaders['Fumbles'] = { 'defaultValue': 'no value given', 'type': 'int'}
+    columnHeaders['Rushing Fumbles'] = { 'defaultValue': 'no value given', 'type': 'int'}
     columnHeaders['Rushing Attempts'] = { 'defaultValue': 'no value given', 'type': 'int'}
     columnHeaders['Rushing Yards'] = { 'defaultValue': 'no value given', 'type': 'int'}
 
